@@ -1,0 +1,56 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "palm",
+  "name": "Mubeen’s Blog",
+  "description": "Engineering deep dives, tools, AI experiments, and personal reflections.",
+  "colors": {
+    "primary": "#16A34A",
+    "light": "#07C983",
+    "dark": "#15803D"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Engineering",
+        "groups": [
+          {
+            "group": "Auth",
+            "pages": [
+              "docs/engineering/building-secure-oauth-flows"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "About",
+        "href": "https://blog.mubeen.in/about"
+      },
+      {
+        "label": "Contact",
+        "href": "mailto:mdmubeen1307@gmail.com"
+      }
+    ]
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "cursor",
+      "vscode"
+    ]
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/mubeen_in",
+      "github": "https://github.com/mubeen-in",
+      "linkedin": "https://linkedin.com/in/mubeen-in"
+    }
+  }
+}
