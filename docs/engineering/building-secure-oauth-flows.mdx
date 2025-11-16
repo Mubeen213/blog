@@ -80,7 +80,7 @@ It does not hold user data. Only manages authentication and authorization.
 
 **Key Principle:**  
 The **Authorization Server** and **Resource Server** are separate.  
-The server that *issues* tokens is not the one that stores user data  they just trust each other.
+The server that issues tokens is not the one that stores user data  they just trust each other.
 
 
 ## <Icon icon="file-text"  size={28}/> Part 2: The Key OAuth Artifacts (The “Jargon”)
@@ -119,7 +119,7 @@ sequenceDiagram
     Client->>ResourceServer: Calls API with Access Token
     ResourceServer-->>Client: Returns user’s protected data
 ```
-## ⚠️ Part 3: OAuth 2.0’s Chaos — The Insecure Flows
+## <Icon icon="alert-triangle" /> OAuth 2.0’s Chaos — The Insecure Flows
 
 When OAuth 2.0 was published in **2012**, it included flows that made sense for early web apps but are now insecure.  
 OAuth 2.1’s primary goal was to **remove** these flows.
@@ -135,7 +135,7 @@ Tokens could be leaked in:
 - Server logs  
 - Referrer headers  
 
-Never use this — it’s completely deprecated.
+Never use this, it’s completely deprecated.
 
 
 ### The “Password” Grant (ROPC) (Removed)
@@ -213,7 +213,7 @@ After successful login and consent, the server redirects back with a one-time **
 The Client securely sends the code and verifier to `/token` using a server-to-server call.  
 This is safe — tokens never appear in the URL or browser.
 
-** Auth Server Validates and Issues Tokens**  
+**Auth Server Validates and Issues Tokens**  
 The Authorization Server validates the hash match and returns:  
 - A short-lived **Access Token**  
 - A long-lived **Refresh Token**
@@ -239,7 +239,7 @@ If valid, data is returned; if not, **401 Unauthorized**.
 ## <Icon icon="rocket" size={28}/> Conclusion — Just Use OAuth 2.1
 
 For any new application, **always follow OAuth 2.1.**  
-It’s not a new protocol — just a secure, simplified version of 2.0.
+It’s not a new protocol - just a secure, simplified version of 2.0.
 
 By using **Authorization Code Grant + PKCE**, you automatically:
 - Avoid insecure flows  
@@ -248,7 +248,7 @@ By using **Authorization Code Grant + PKCE**, you automatically:
 
 OAuth 2.1 makes the secure path the *only* path — simple, consistent, and safe.
 
----
+
 
 ## <Icon icon="file-cog" size={28}/> Bonus: Discovery & Dynamic Client Registration
 
