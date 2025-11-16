@@ -17,7 +17,7 @@
           {
             "group": "Auth",
             "pages": [
-              "docs/engineering/building-secure-oauth-flows"
+              "docs/engineering/auth/building-secure-oauth-flows"
             ]
           }
         ]
