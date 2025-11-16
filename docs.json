@@ -8,7 +8,7 @@
     "light": "#07C983",
     "dark": "#15803D"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "favicon.svg",
   "navigation": {
     "tabs": [
       {
@@ -27,10 +27,6 @@
   "navbar": {
     "links": [
       {
-        "label": "About",
-        "href": "https://blog.mubeen.in/about"
-      },
-      {
         "label": "Contact",
         "href": "mailto:mdmubeen1307@gmail.com"
       }
@@ -48,9 +44,9 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mubeen_in",
-      "github": "https://github.com/mubeen-in",
-      "linkedin": "https://linkedin.com/in/mubeen-in"
+      "x": "https://x.com/Mubeen213",
+      "github": "https://github.com/Mubeen213",
+      "linkedin": "https://www.linkedin.com/in/md-mubeen-8994311a0"
     }
   }
 }

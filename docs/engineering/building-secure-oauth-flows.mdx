@@ -124,7 +124,7 @@ sequenceDiagram
 When OAuth 2.0 was published in **2012**, it included flows that made sense for early web apps but are now insecure.  
 OAuth 2.1’s primary goal was to **remove** these flows.
 
-### ❌ The “Implicit” Grant (Removed)
+### The “Implicit” Grant (Removed)
 
 **What it was:**  
 A flow for frontend-only apps that returned the **Access Token** directly in the URL (e.g., `#token=abcd...`).  
@@ -137,9 +137,8 @@ Tokens could be leaked in:
 
 Never use this — it’s completely deprecated.
 
----
 
-### ❌ The “Password” Grant (ROPC) (Removed)
+### The “Password” Grant (ROPC) (Removed)
 
 **What it was:**  
 Allowed an app to directly ask users for their username and password.
@@ -149,14 +148,13 @@ This breaks the entire *delegation model*.
 Apps should **never** see a user’s credentials for another service.  
 Only legacy first-party apps ever used this.
 
----
 
-## ✅ Part 4: OAuth 2.1’s Order — The Secure Modern Flow
+##  Part 4: OAuth 2.1’s Order — The Secure Modern Flow
 
 OAuth 2.1 simplifies everything by mandating one secure flow for all user-based authorization:  
 **The Authorization Code Grant + PKCE (Proof Key for Code Exchange).**
 
-### 🔐 What is PKCE?
+###  What is PKCE?
 
 PKCE (“pixie”) stands for **Proof Key for Code Exchange**.  
 It adds a dynamic, one-time-use secret that protects against code interception attacks.
@@ -169,9 +167,8 @@ It adds a dynamic, one-time-use secret that protects against code interception a
 
 This ensures only the same client that *started* the flow can *finish* it.
 
----
 
-### 🧭 The Authorization Code Flow (with PKCE)
+###  The Authorization Code Flow (with PKCE)
 
 ```mermaid
 sequenceDiagram
@@ -197,3 +194,67 @@ sequenceDiagram
     Client->>ResourceServer: 5. API request (sends Access Token)
     ResourceServer->>ResourceServer: Validates token
     ResourceServer-->>Client: 6. Returns secure data
+```
+
+## Step-by-Step Breakdown
+
+**Client Initiates**  
+The React app generates the PKCE `code_verifier` and `code_challenge`.  
+It stores the verifier locally and redirects the user to the Authorization Server with the challenge.
+
+**User Authenticates & Consents**  
+The Authorization Server (`auth.api.com`) shows a login screen.  
+The user logs in and grants permission (e.g., “Allow access to `read:profile`”).
+
+**Authorization Server Issues Code**  
+After successful login and consent, the server redirects back with a one-time **Authorization Code**.
+
+**Client Exchanges Code (Back-Channel)**  
+The Client securely sends the code and verifier to `/token` using a server-to-server call.  
+This is safe — tokens never appear in the URL or browser.
+
+** Auth Server Validates and Issues Tokens**  
+The Authorization Server validates the hash match and returns:  
+- A short-lived **Access Token**  
+- A long-lived **Refresh Token**
+
+**Client Accesses Protected Resources**  
+The Client calls the Resource Server with the Access Token in the `Authorization` header.  
+If valid, data is returned; if not, **401 Unauthorized**.
+
+
+## <Icon icon="scale" size={28}/> Part 5: OAuth 2.0 vs OAuth 2.1 — The Comparison
+
+| **Feature** | **OAuth 2.0 (Old)** | **OAuth 2.1 (New)** |
+| :--- | :--- | :--- |
+| **Main Flow** | Authorization Code, Implicit, Password | **Authorization Code + PKCE** |
+| **PKCE** | Optional | **Mandatory** |
+| **Implicit Grant** | Allowed | **Removed** |
+| **Password Grant** | Allowed | **Removed** |
+| **Refresh Tokens** | Could be static | **Must be rotated or sender-constrained** |
+| **Redirect URIs** | Partial matches allowed | **Must match exactly** |
+
+
+
+## <Icon icon="rocket" size={28}/> Conclusion — Just Use OAuth 2.1
+
+For any new application, **always follow OAuth 2.1.**  
+It’s not a new protocol — just a secure, simplified version of 2.0.
+
+By using **Authorization Code Grant + PKCE**, you automatically:
+- Avoid insecure flows  
+- Comply with best practices  
+- Ensure your app works across web, mobile, and microservices securely  
+
+OAuth 2.1 makes the secure path the *only* path — simple, consistent, and safe.
+
+---
+
+## <Icon icon="file-cog" size={28}/> Bonus: Discovery & Dynamic Client Registration
+
+If you’re building a fully compliant OAuth 2.1 server, also include these:
+
+| **Feature** | **Description** |
+| :--- | :--- |
+| **Discovery Endpoint (`.well-known`)** | A public JSON file (e.g., `https://auth.example.com/.well-known/oauth-authorization-server`) that describes your auth endpoints. |
+| **Dynamic Client Registration (DCR)** | An endpoint (e.g., `/register`) that lets new clients register programmatically instead of manually creating a `client_id`. |
