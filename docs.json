@@ -19,6 +19,12 @@
             "pages": [
               "docs/engineering/auth/building-secure-oauth-flows"
             ]
+          },
+          {
+            "group": "AI",
+            "pages": [
+              "docs/engineering/ai/mcp_server"
+            ]
           }
         ]
       }
