@@ -15,16 +15,18 @@
         "tab": "Engineering",
         "groups": [
           {
-            "group": "Auth",
+            "group": "Architecture",
             "pages": [
-              "docs/engineering/auth/building-secure-oauth-flows"
+              "docs/engineering/architecture/anatomy-of-a-clean-backend"
             ]
           },
           {
+            "group": "Auth",
+            "pages": ["docs/engineering/auth/building-secure-oauth-flows"]
+          },
+          {
             "group": "AI",
-            "pages": [
-              "docs/engineering/ai/mcp_server"
-            ]
+            "pages": ["docs/engineering/ai/mcp_server"]
           }
         ]
       }
@@ -39,14 +41,7 @@
     ]
   },
   "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "cursor",
-      "vscode"
-    ]
+    "options": ["copy", "view", "chatgpt", "claude", "cursor", "vscode"]
   },
   "footer": {
     "socials": {
